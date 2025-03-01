@@ -1,0 +1,347 @@
+.report-contt{
+    background-color: #F5F5F5;
+  
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 300px; 
+    justify-content: space-between;
+    padding-bottom: 60px;
+   
+    
+}
+.result-containers {
+    width: 990px;
+    margin-left: 100px;
+    background-color: #ffffff;
+   
+    margin-top: 35px;
+    margin-bottom: 35px;
+    padding: 20px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: auto;
+    margin-left: 20%;
+    max-height: 80vh;
+}
+
+.result-headingg {
+    color: #2c3e50;
+    font-size: 30px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+}
+
+.result-sectionn {
+    margin-bottom: 15px;
+    
+}
+
+.qa-box {
+    background-color: #f8f9fa;
+   
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+   
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border-left: 4px solid #007bff;
+}
+
+.question {
+    color: #2c3e50;
+    font-size: 20px;
+    margin-bottom: 12px;
+    font-weight: 600;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 8px;
+}
+
+.answer {
+    padding-left: 15px;
+}
+
+.answer p {
+    color: #34495e;
+    margin: 8px 0;
+    line-height: 1.6;
+    font-size: 16px;
+  
+}
+
+/* Scrollbar styling */
+.result-containers::-webkit-scrollbar {
+    width: 8px;
+}
+
+.result-containers::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.result-containers::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.result-containers::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Different border colors for different sections */
+.qa-box:nth-child(1) {
+    border-left-color: #007bff;
+}
+
+.qa-box:nth-child(2) {
+    border-left-color: #28a745;
+}
+
+.qa-box:nth-child(3) {
+    border-left-color: #ffc107;
+}
+
+.qa-box:nth-child(4) {
+    border-left-color: #dc3545;
+}
+
+.qa-box:nth-child(5) {
+    border-left-color: #17a2b8;
+}
+
+/* Hover effect */
+.qa-box:hover {
+    transform: translateX(5px);
+    transition: transform 0.2s ease;
+}
+
+.loader-container{
+  width: 1000px;
+  display: flex;
+  justify-content: center;
+  height: 60vh;
+  align-items: center;
+  
+}
+.change-button-container{
+    background-color: aqua;
+    height: 100vh;
+}
+.container-for-reportt{
+    display: flex;
+    justify-content: space-between;
+   
+    width: 80%;
+    padding-top: 70px;
+    
+}
+.file{
+    background-color: blue;
+
+}
+
+.file-upload-container {
+    display: inline-block;
+    position: relative;
+  }
+  
+
+  .file-upload-container input[type="file"] {
+    display: none;
+  }
+  
+
+  .custom-file-upload {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #007bff;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 0px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+
+  .upload-icon {
+    margin-right: 10px;
+    font-size: 18px;
+  }
+  
+  
+  .custom-file-upload:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .language-dropdown-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+  }
+  
+  .language-dropdown {
+    width: 200px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .language-dropdown:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  .report-button{
+    background-color: #007bff;
+    height: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #ffffff;
+    border-radius: 7px;
+    border:none;
+    font-size: 25px;
+  }
+  .files{
+    display: flex;
+    justify-content: space-between;
+    width: 1000px;
+  }
+  .result-description{
+    color:#000000;
+    font-size: 25px;
+  }
+
+.medical-disclaimer {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 900px;
+}
+
+.disclaimer-text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Update result sections for fracture-specific styling */
+.qa-box.fracture-positive {
+    border-left-color: #dc3545;
+}
+
+.qa-box.fracture-negative {
+    border-left-color: #28a745;
+}
+
+.fracture-status {
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.fracture-positive .fracture-status {
+    background-color: #dc3545;
+    color: white;
+}
+
+.fracture-negative .fracture-status {
+    background-color: #28a745;
+    color: white;
+}
+
+.appointment-form-container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.cancel {
+    background-color: #dc3545;
+}
+
+.success-message {
+    color: #28a745;
+    text-align: center;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #d4edda;
+    border-radius: 4px;
+}
+
+.error-message {
+    color: #dc3545;
+    text-align: center;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f8d7da;
+    border-radius: 4px;
+}
+
+.disabled-input {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+}
+
+.form-group select:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
