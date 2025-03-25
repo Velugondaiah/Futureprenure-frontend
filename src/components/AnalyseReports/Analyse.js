@@ -60,7 +60,7 @@ class Analyse extends React.Component {
         formData.append('language', selectedLanguage);
 
         try {
-            const response = await fetch('https://backend-diagno-1.onrender.com/api/analyze', {
+            const response = await fetch('http://localhost:3009/api/analyze', {
                 // https://backend-diagno-1.onrender.com
                 method: 'POST',
                 body: formData,

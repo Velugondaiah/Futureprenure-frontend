@@ -82,9 +82,8 @@
 }
 
 .large-devices-container {
-    display: none;
+    display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 15px 40px;
     background-color: #ffffff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -95,17 +94,27 @@
     z-index: 1000;
 }
 
+.logo-health-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 300px;
+}
+
+.nav-links-container {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+}
+
 .unorder-lists {
     display: flex;
     align-items: center;
     gap: 30px;
     margin: 0;
     padding: 0;
-    white-space: nowrap;
-   
-    display: flex;
+    list-style: none;
 }
-
 
 li {
     list-style-type: none;
@@ -138,29 +147,85 @@ li:hover {
     transform: translateY(-2px);
 }
 
-@media screen and (min-width: 768px) {
-    .small-devices-nav-container {
-        display: none;
+.right-section {
+    min-width: 300px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.health-metrics-large {
+    position: relative;
+}
+
+.health-metrics-dropdown {
+    cursor: pointer;
+}
+
+.health-metrics-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.health-metrics-header:hover {
+    background-color: #f1f5f9;
+}
+
+.health-metrics-header span {
+    font-weight: 500;
+    color: #1e293b;
+}
+
+.health-dropdown.large {
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 250px;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
     }
-    
-    .large-devices-container {
-        display: flex;
-        
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
+.health-dropdown {
+    animation: slideDown 0.2s ease-out;
+}
+
 @media screen and (max-width: 767px) {
-    .large-devices-container {
+    .small-devices-nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 20px;
+    }
+
+    .logo-health-container {
+        gap: 8px;
+        min-width: auto;
+    }
+
+    .health-metrics-large {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .health-metrics-container {
         display: none;
     }
     
-    .icons {
-        font-size: 24px;
-        margin-left: 16px;
-    }
-    
-    .logo {
-        height: 40px;
+    .health-metrics-large {
+        display: block;
     }
 }
 
@@ -177,5 +242,83 @@ li:hover {
     .small-devices-nav-container {
         padding: 12px 16px;
     }
+}
+
+.health-metrics-container {
+  position: relative;
+  margin-right: 30px;
+}
+
+.health-icon {
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background-color: #f8fafc;
+}
+
+.health-icon-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.arrow-icon {
+  font-size: 12px;
+  color: #64748b;
+  transition: transform 0.3s ease;
+}
+
+.health-icon:hover {
+  background-color: #f1f5f9;
+}
+
+.health-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  min-width: 220px;
+  z-index: 1000;
+  border: 1px solid #e2e8f0;
+}
+
+.metric-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.metric-item:hover {
+  background-color: #f8fafc;
+}
+
+.metric-icon {
+  font-size: 20px;
+  color: #3b82f6;
+}
+
+.metric-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metric-label {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.metric-value {
+  font-size: 14px;
+  color: #1e293b;
+  font-weight: 600;
 }
 

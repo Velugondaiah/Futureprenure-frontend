@@ -4,12 +4,13 @@ import Cookies from "js-cookie";
 import { AiFillHome } from "react-icons/ai";
 import { IoReorderThreeSharp } from 'react-icons/io5';
 import { MdMedicalServices } from "react-icons/md";
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle, FaHeartbeat, FaThermometerHalf, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { GiLungs } from "react-icons/gi";
 import "./Header.css";
 import { Sidebar, SidebarItem } from "./StyledComponent";
 
 class Header extends Component {
-  state = { isSidebarOpen: false };
+  state = { isSidebarOpen: false, healthMetrics: { heart_rate: '--', spo2: '--', temperature: '--' }, showHealthDropdown: false };
 
   logoutBtn = () => {
     Cookies.remove("jwt_token");
@@ -35,10 +36,15 @@ class Header extends Component {
 
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutSide);
+    this.fetchHealthMetrics();
+    this.healthMetricsInterval = setInterval(this.fetchHealthMetrics, 5000);
   }
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClickOutSide);
+    if (this.healthMetricsInterval) {
+      clearInterval(this.healthMetricsInterval);
+    }
   }
 
   handleProfileClick = () => {
@@ -55,8 +61,59 @@ class Header extends Component {
     this.setState({ isSidebarOpen: false });
   };
 
+  toggleHealthDropdown = () => {
+    this.setState(prevState => ({
+      showHealthDropdown: !prevState.showHealthDropdown,
+    }));
+  };
+
+  fetchHealthMetrics = async () => {
+    try {
+      const userId = Cookies.get('id');
+      const jwtToken = Cookies.get('jwt_token');
+      
+      if (!userId) {
+        console.error('User ID not found in cookies');
+        return;
+      }
+
+      const response = await fetch(`http://localhost:3009/api/health-metrics/${userId}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${jwtToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Received health metrics:', data);
+
+      this.setState({
+        healthMetrics: {
+          heart_rate: data.heart_rate || '--',
+          spo2: data.spo2 || '--',
+          temperature: data.temperature || '--'
+        }
+      });
+
+    } catch (error) {
+      console.error('Error fetching health metrics:', error);
+      this.setState({
+        healthMetrics: {
+          heart_rate: '--',
+          spo2: '--',
+          temperature: '--'
+        }
+      });
+    }
+  };
+
   render() {
-    const { isSidebarOpen } = this.state;
+    const { isSidebarOpen, healthMetrics, showHealthDropdown } = this.state;
     const { history } = this.props;
 
     return (
@@ -68,6 +125,43 @@ class Header extends Component {
             className="logo" 
             src="https://res.cloudinary.com/dbroxheos/image/upload/v1727450617/gdyevtkkyx2gplt3c0kv.png" 
           />
+          <div className="health-metrics-container">
+            <div className="health-icon" onClick={this.toggleHealthDropdown}>
+              <div className="health-icon-content">
+                <FaHeartbeat className="icons" />
+                {showHealthDropdown ? (
+                  <FaChevronUp className="arrow-icon" />
+                ) : (
+                  <FaChevronDown className="arrow-icon" />
+                )}
+              </div>
+            </div>
+            {showHealthDropdown && (
+              <div className="health-dropdown">
+                <div className="metric-item">
+                  <FaHeartbeat className="metric-icon" />
+                  <div className="metric-details">
+                    <span className="metric-label">Heart Rate</span>
+                    <span className="metric-value">{healthMetrics.heart_rate} BPM</span>
+                  </div>
+                </div>
+                <div className="metric-item">
+                  <GiLungs className="metric-icon" />
+                  <div className="metric-details">
+                    <span className="metric-label">SpO2</span>
+                    <span className="metric-value">{healthMetrics.spo2}%</span>
+                  </div>
+                </div>
+                <div className="metric-item">
+                  <FaThermometerHalf className="metric-icon" />
+                  <div className="metric-details">
+                    <span className="metric-label">Temperature</span>
+                    <span className="metric-value">{healthMetrics.temperature}°F</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
           <div className="icons-container">
             <Link to="/" className="link">
               <AiFillHome className="icons" />
@@ -105,34 +199,75 @@ class Header extends Component {
 
         {/* Large devices navigation */}
         <nav className="large-devices-container">
-          <Link to="/">
-            <img
-              alt="logo"
-              className="logo"
-              src="https://res.cloudinary.com/dbroxheos/image/upload/v1727450617/gdyevtkkyx2gplt3c0kv.png"
-            />
-          </Link>
-          <ul className="unorder-lists">
-            <Link to="/" className="link">
-              <li>Home</li>
+          <div className="logo-health-container">
+            <Link to="/">
+              <img alt="logo" className="logo" src="https://res.cloudinary.com/dbroxheos/image/upload/v1727450617/gdyevtkkyx2gplt3c0kv.png" />
             </Link>
-            <Link to="/about-us" className="link">
-              <li>About&nbsp;Us</li>
-            </Link>
-            <Link to="/services" className="link">
-              <li>Services</li>
-            </Link>
-            {/* to={`/profile/${Cookies.get('user_id')}`} */}
-            <Link to="/profile"  className="link">
-              <li>Profile</li>
-            </Link>
-            <Link to="/booking-history" className="link">
-              <li>Booking History</li>
-            </Link>
-          </ul>
-          <button type="button" className="logout-button" onClick={this.logoutBtn}>
-            Logout
-          </button>
+            <div className="health-metrics-large">
+              <div className="health-metrics-dropdown" onClick={this.toggleHealthDropdown}>
+                <div className="health-metrics-header">
+                  <FaHeartbeat className="icons" />
+                  <span>Health Metrics</span>
+                  {showHealthDropdown ? (
+                    <FaChevronUp className="arrow-icon" />
+                  ) : (
+                    <FaChevronDown className="arrow-icon" />
+                  )}
+                </div>
+                {showHealthDropdown && (
+                  <div className="health-dropdown large">
+                    <div className="metric-item">
+                      <FaHeartbeat className="metric-icon" />
+                      <div className="metric-details">
+                        <span className="metric-label">Heart Rate</span>
+                        <span className="metric-value">{healthMetrics.heart_rate} BPM</span>
+                      </div>
+                    </div>
+                    <div className="metric-item">
+                      <GiLungs className="metric-icon" />
+                      <div className="metric-details">
+                        <span className="metric-label">SpO2</span>
+                        <span className="metric-value">{healthMetrics.spo2}%</span>
+                      </div>
+                    </div>
+                    <div className="metric-item">
+                      <FaThermometerHalf className="metric-icon" />
+                      <div className="metric-details">
+                        <span className="metric-label">Temperature</span>
+                        <span className="metric-value">{healthMetrics.temperature}°C</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="nav-links-container">
+            <ul className="unorder-lists">
+              <Link to="/" className="link">
+                <li>Home</li>
+              </Link>
+              <Link to="/about-us" className="link">
+                <li>About&nbsp;Us</li>
+              </Link>
+              <Link to="/services" className="link">
+                <li>Services</li>
+              </Link>
+              <Link to="/profile" className="link">
+                <li>Profile</li>
+              </Link>
+              <Link to="/booking-history" className="link">
+                <li>Booking History</li>
+              </Link>
+            </ul>
+          </div>
+
+          <div className="right-section">
+            <button type="button" className="logout-button" onClick={this.logoutBtn}>
+              Logout
+            </button>
+          </div>
         </nav>
       </>
     );

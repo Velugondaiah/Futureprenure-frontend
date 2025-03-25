@@ -6,12 +6,13 @@ import { GrHistory } from "react-icons/gr";
 import { BsGraphUp } from "react-icons/bs";
 import { MdOutlineSecurity } from "react-icons/md";
 import { MdDateRange } from "react-icons/md";
+import { MdHealthAndSafety } from "react-icons/md";
 import { useEffect, useState } from "react";
 import "./Home.css"
 
 const Home = () => {
     const [text, setText] = useState("");
-    const message = "Welcome to Diagno AI";
+    const message = "Welcome to VAIDHY AI";
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -53,7 +54,7 @@ const Home = () => {
                         <img 
                             className="second-container-image" 
                             src="https://res.cloudinary.com/dbroxheos/image/upload/v1727800728/Half_design_794_x_1012_px_flwz3e.png" 
-                            alt="Diagno AI Illustration"
+                            alt="Vaidhy AI Illustration"
                         />
                     </div>
                 </div>
@@ -61,7 +62,7 @@ const Home = () => {
 
             <div className="key-features-container">
                 <div className="features-header">
-                    <h1 className="features-heading">Key Features of Diagno AI</h1>
+                    <h1 className="features-heading">Key Features of Vaidhy AI</h1>
                     <p className="feature-description">
                         Discover the cutting-edge features that set our AI-powered healthcare platform apart.
                     </p>
@@ -112,19 +113,19 @@ const Home = () => {
                         <div className="icon-wrapper">
                             <BsGraphUp className="features-icons" />
                         </div>
-                        <h1 className="icons-heading">Outcome-Based Insights</h1>
+                        <h1 className="icons-heading">Real Time Health Monitoring</h1>
                         <p className="icons-paragraph">
-                            Receive personalized insights based on your diagnostic results and health data.
+                           Live analysis of the patient's condition.
                         </p>
                     </div>
 
                     <div className="icons-containers">
                         <div className="icon-wrapper">
-                            <MdOutlineSecurity className="features-icons" />
+                            <MdHealthAndSafety className="features-icons" />
                         </div>
-                        <h1 className="icons-heading">Data Security</h1>
+                        <h1 className="icons-heading">AI based Health Care recommendation</h1>
                         <p className="icons-paragraph">
-                            Your medical data is secure with our robust data protection measures.
+                           Personalized health care recommendation based on the data.
                         </p>
                     </div>
                 </div>

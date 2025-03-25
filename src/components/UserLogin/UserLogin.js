@@ -14,14 +14,9 @@ class LoginForm extends Component {
 //
   onSubmitSuccess = (data) => {
     const {history} = this.props
-
-
-   
-    // Save token to cookies
-    Cookies.set('jwt_token', data.jwt_token, {
-      expires: 30,
-    
-    })
+    const { jwt_token, user } = data;
+    Cookies.set('jwt_token', jwt_token, { expires: 30 });
+    Cookies.set('id', user.id.toString(), { expires: 30 });
     let id = data.user.id;
     localStorage.setItem('userDetails',JSON.stringify(data.user))
     localStorage.setItem('userData', JSON.stringify(id))
@@ -33,7 +28,7 @@ class LoginForm extends Component {
     const {username, password} = this.state
     
     const userDetails = {username, password}
-    const url = 'https://backend-diagno-1.onrender.com/api/login'
+    const url = 'http://localhost:3009/api/login'
                 
     try {
       const response = await fetch(url, {
