@@ -31,7 +31,7 @@ const DiagnosisAppointments = () => {
     const fetchUserTests = async () => {
         try {
             const userId = JSON.parse(localStorage.getItem('userDetails')).id;
-            const response = await fetch(`http://localhost:3009/api/user-diagnosis-tests/${userId}`, {
+            const response = await fetch(`https://backend-diagno-1.onrender.com/api/user-diagnosis-tests/${userId}`, {
                 headers: {
                     'Authorization': `Bearer ${Cookies.get('jwt_token')}`
                 }
@@ -49,7 +49,7 @@ const DiagnosisAppointments = () => {
 
     const fetchDiagnosisCenters = async () => {
         try {
-            const response = await fetch('http://localhost:3009/api/diagnosis-centers', {
+            const response = await fetch('https://backend-diagno-1.onrender.com/api/diagnosis-centers', {
                 headers: {
                     'Authorization': `Bearer ${Cookies.get('jwt_token')}`
                 }

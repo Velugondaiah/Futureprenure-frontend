@@ -127,7 +127,7 @@ class Appointments extends Component {
 
   fetchLocations = async () => {
     try {
-      const response = await axios.get('http://localhost:3009/api/doctor-locations');
+      const response = await axios.get('https://backend-diagno-1.onrender.com/api/doctor-locations');
       console.log(response)
       console.log("response")
       this.setState({ locations: response.data });
@@ -183,7 +183,7 @@ class Appointments extends Component {
         console.log('Submitting appointment data:', appointmentData); // Debug log
 
         const response = await axios.post(
-            'http://localhost:3009/api/appointments',
+            'https://backend-diagno-1.onrender.com/api/appointments',
             appointmentData
         );
 
@@ -332,7 +332,7 @@ class Appointments extends Component {
             specialization: specialist
         });
 
-        const response = await axios.get('http://localhost:3009/api/doctor-locations/getDoctors', {
+        const response = await axios.get('https://backend-diagno-1.onrender.com/api/doctor-locations/getDoctors', {
             params: {
                 location: selectedLocation,
                 specialization: specialist
@@ -415,7 +415,7 @@ class Appointments extends Component {
         }
 
         // First verify if user exists and get their email
-        const userCheckResponse = await axios.get(`http://localhost:3009/api/users/${user_id}`);
+        const userCheckResponse = await axios.get(`https://backend-diagno-1.onrender.com/api/users/${user_id}`);
         
         if (!userCheckResponse.data) {
             throw new Error('User not found. Please login again.');
@@ -455,7 +455,7 @@ class Appointments extends Component {
 
         // Create appointment
         const response = await axios.post(
-            'http://localhost:3009/api/appointments',
+            'https://backend-diagno-1.onrender.com/api/appointments',
             appointmentData,
             {
                 headers: {
@@ -598,7 +598,7 @@ class Appointments extends Component {
     });
 
     try {
-        const response = await fetch('http://localhost:3009/api/appointments', {
+        const response = await fetch('https://backend-diagno-1.onrender.com/api/appointments', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

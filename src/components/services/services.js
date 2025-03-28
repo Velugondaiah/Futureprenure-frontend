@@ -134,6 +134,27 @@ const Services = () => {
                             </div>
                         </div>
                     </Link>
+                    <Link to="/diagnosis-appointments" className="icons-containers">
+                        <div className="service-content">
+                            <div className="icon-wrapper">
+                                <FaUserMd className="features-icons" />
+                            </div>
+                            <h1 className="icons-heading">Diagno Center</h1>
+                            <p className="icons-paragraph">
+                                Book appointments for diagnostic tests recommended by your doctor
+                            </p>
+                            <ul className="service-features">
+                                <li><FaCheckCircle />Multiple Test Selection</li> 
+                                <li><FaClock />Flexible Scheduling</li>
+                                <li><FaShieldAlt />Secure & Reliable</li>
+                            </ul>
+                            
+                            <div className="service-cta">
+                                <span>Book Now</span>
+                                <FaArrowRight className="arrow-icon" />
+                            </div>
+                        </div>
+                    </Link>
                 </div>
             </div>
         </div>

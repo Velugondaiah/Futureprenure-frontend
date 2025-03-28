@@ -63,7 +63,7 @@ const BookingHistory = () => {
             }
 
             // Log the full URL being called
-            const url = `http://localhost:3009/api/appointments/history/${userId}`;
+            const url = `https://backend-diagno-1.onrender.com/api/appointments/history/${userId}`;
             console.log('Fetching from URL:', url);
 
             const response = await fetch(url, {

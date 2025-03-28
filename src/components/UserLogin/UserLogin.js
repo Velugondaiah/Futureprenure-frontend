@@ -28,7 +28,7 @@ class LoginForm extends Component {
     const {username, password} = this.state
     
     const userDetails = {username, password}
-    const url = 'http://localhost:3009/api/login'
+    const url = 'https://backend-diagno-1.onrender.com/api/login'
                 
     try {
       const response = await fetch(url, {
