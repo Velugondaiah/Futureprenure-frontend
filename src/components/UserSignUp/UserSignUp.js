@@ -59,7 +59,7 @@ class SignUp extends Component {
         try {
             console.log('Sending signup data:', this.state); // Debug log
 
-            const response = await fetch("https://backend-diagno-1.onrender.com/api/signup", {
+            const response = await fetch("http://localhost:3009/api/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
