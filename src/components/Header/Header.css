@@ -28,7 +28,7 @@
     transition: all 0.3s ease;
 }
 
-.logout:hover {
+.logout:hover .stars {
     background-color: #3b82f6;
     color: white;
 }

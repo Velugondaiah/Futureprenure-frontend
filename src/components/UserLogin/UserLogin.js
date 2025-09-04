@@ -3,6 +3,7 @@ import Cookies from "js-cookie"
 import {Redirect} from "react-router-dom"
 import {Link} from "react-router-dom"
 import "./UserLogin.css"
+const API_URL = process.env.REACT_APP_API_URL;
 
 class LoginForm extends Component {
   state = {
@@ -28,7 +29,7 @@ class LoginForm extends Component {
     const {username, password} = this.state
     
     const userDetails = {username, password}
-    const url = 'http://localhost:3009/api/login'
+    const url = `${API_URL}/api/login`
                 
     try {
       const response = await fetch(url, {

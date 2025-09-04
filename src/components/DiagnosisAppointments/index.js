@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Header from '../Header/Header';
 import './index.css';
+const API_URL = process.env.REACT_APP_API_URL;
 
 const DiagnosisAppointments = () => {
     const [formData, setFormData] = useState({
@@ -31,7 +32,7 @@ const DiagnosisAppointments = () => {
     const fetchUserTests = async () => {
         try {
             const userId = JSON.parse(localStorage.getItem('userDetails')).id;
-            const response = await fetch(`https://backend-diagno-1.onrender.com/api/user-diagnosis-tests/${userId}`, {
+            const response = await fetch(`${API_URL}/api/user-diagnosis-tests/${userId}`, {
                 headers: {
                     'Authorization': `Bearer ${Cookies.get('jwt_token')}`
                 }
@@ -49,7 +50,7 @@ const DiagnosisAppointments = () => {
 
     const fetchDiagnosisCenters = async () => {
         try {
-            const response = await fetch('https://backend-diagno-1.onrender.com/api/diagnosis-centers', {
+            const response = await fetch(`${API_URL}/api/diagnosis-centers`, {
                 headers: {
                     'Authorization': `Bearer ${Cookies.get('jwt_token')}`
                 }
@@ -75,7 +76,7 @@ const DiagnosisAppointments = () => {
 
         try {
             const userId = JSON.parse(localStorage.getItem('userDetails')).id;
-            const response = await fetch('http://localhost:3009/api/diagnosis-appointments', {
+            const response = await fetch(`${API_URL}/api/diagnosis-appointments`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

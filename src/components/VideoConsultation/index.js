@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 import './index.css';
 import { FaMicrophone, FaMicrophoneSlash, FaVideo, FaVideoSlash, FaPhone, FaThermometer } from 'react-icons/fa';
 import supabase from '../../lib/supabase';
+const API_URL = process.env.REACT_APP_API_URL;
 
 const VideoConsultation = () => {
     const { meeting_id } = useParams();
@@ -92,7 +93,7 @@ const VideoConsultation = () => {
                     localVideoRef.current.srcObject = stream;
                 }
 
-                socketRef.current = io('https://backend-diagno-1.onrender.com');
+                socketRef.current = io(`${API_URL}`);
 
                 socketRef.current.on('connect', () => {
                     console.log('Patient: Socket connected');

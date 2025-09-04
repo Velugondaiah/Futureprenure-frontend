@@ -6,7 +6,7 @@ import axios from 'axios';
 import "./index.css";
 import { Oval } from 'react-loader-spinner'; // Import the specific loader, e.g., Oval
 import { useState } from "react"; // Add this import
-
+const API_URL = process.env.REACT_APP_API_URL;
 const languages = [
     { id: "english", language: "English" },
     { id: "telugu", language: "Telugu / తెలుగు" },
@@ -92,7 +92,7 @@ class XrayReports extends Component {
         formData.append('fileType', 'xray');
 
         try {
-            const response = await axios.post('http://localhost:3009/upload', formData, {
+            const response = await axios.post(`${API_URL}/upload`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
 

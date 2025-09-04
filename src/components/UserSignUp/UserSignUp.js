@@ -1,6 +1,7 @@
 import { Component } from "react";
 import "./UserSignUp.css"
 import {Link} from "react-router-dom"
+const API_URL = process.env.REACT_APP_API_URL;
 
 class SignUp extends Component {
     state = {
@@ -59,7 +60,7 @@ class SignUp extends Component {
         try {
             console.log('Sending signup data:', this.state); // Debug log
 
-            const response = await fetch("http://localhost:3009/api/signup", {
+            const response = await fetch(`${API_URL}/api/signup`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

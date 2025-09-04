@@ -7,7 +7,7 @@ import './index.css';
 import { Link } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import { FaFilePrescription, FaDownload } from 'react-icons/fa';
-
+const API_URL = process.env.REACT_APP_API_URL;
 const formatMonth = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleString('default', { month: 'short' });
@@ -63,7 +63,7 @@ const BookingHistory = () => {
             }
 
             // Log the full URL being called
-            const url = `https://backend-diagno-1.onrender.com/api/appointments/history/${userId}`;
+            const url = `${API_URL}/api/appointments/history/${userId}`;
             console.log('Fetching from URL:', url);
 
             const response = await fetch(url, {

@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 import Cookies from 'js-cookie';
 import { FaMicrophone, FaMicrophoneSlash, FaVideo, FaVideoSlash, FaPhone } from 'react-icons/fa';
 import './index.css';
+const API_URL = process.env.REACT_APP_API_URL;
 
 const VideoRoom = () => {
     const { meeting_id } = useParams();
@@ -110,7 +111,7 @@ const VideoRoom = () => {
                 }
 
                 // Connect to signaling server
-                socketRef.current = io('https://backend-diagno-1.onrender.com');
+                socketRef.current = io(`${API_URL}`);
 
                 socketRef.current.on('connect', () => {
                     console.log('Doctor connecting to room:', meeting_id);

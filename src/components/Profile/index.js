@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Header from "../Header/Header";
+
 import { 
     FaUser, 
     FaEnvelope, 
