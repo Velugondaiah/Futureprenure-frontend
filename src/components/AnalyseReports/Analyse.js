@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 import { FiUpload, FiVolume2, FiSquare } from 'react-icons/fi';
 import { FaHeartbeat } from 'react-icons/fa';
 import "./Analyse.css";
-const API_URL = process.env.REACT_APP_API_URL;
+// const API_URL = process.env.REACT_APP_API_URL;
 
 const languages = [
     { id: "english", language: "English" },
@@ -63,7 +63,7 @@ class Analyse extends React.Component {
         formData.append('language', selectedLanguage);
 
         try {
-            const response = await fetch(`${API_URL}/api/analyze`, {
+            const response = await fetch('http://localhost:3009/api/analyze', {
                 // https://backend-diagno-1.onrender.com
                 method: 'POST',
                 body: formData,
