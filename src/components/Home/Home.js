@@ -12,7 +12,7 @@ import "./Home.css"
 
 const Home = () => {
     const [text, setText] = useState("");
-    const message = "Welcome to VAIDHY AI";
+    const message = "Welcome to Diagno AI";
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -54,7 +54,7 @@ const Home = () => {
                         <img 
                             className="second-container-image" 
                             src="https://res.cloudinary.com/dbroxheos/image/upload/v1727800728/Half_design_794_x_1012_px_flwz3e.png" 
-                            alt="Vaidhy AI Illustration"
+                            alt="Diagno AI Illustration"
                         />
                     </div>
                 </div>
@@ -62,7 +62,7 @@ const Home = () => {
 
             <div className="key-features-container">
                 <div className="features-header">
-                    <h1 className="features-heading">Key Features of Vaidhy AI</h1>
+                    <h1 className="features-heading">Key Features of Diagno AI</h1>
                     <p className="feature-description">
                         Discover the cutting-edge features that set our AI-powered healthcare platform apart.
                     </p>

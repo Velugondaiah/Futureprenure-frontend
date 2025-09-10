@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import io from 'socket.io-client';
-import Cookies from 'js-cookie';
 import { FaMicrophone, FaMicrophoneSlash, FaVideo, FaVideoSlash, FaPhone } from 'react-icons/fa';
 import './index.css';
+
 const API_URL = process.env.REACT_APP_API_URL;
 
 const VideoRoom = () => {
@@ -19,7 +19,6 @@ const VideoRoom = () => {
     const localStreamRef = useRef(null);
 
     // State
-    const [isConnected, setIsConnected] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     const [isVideoOff, setIsVideoOff] = useState(false);
     const [connectionStatus, setConnectionStatus] = useState('Connecting...');
@@ -28,9 +27,7 @@ const VideoRoom = () => {
     const createPeerConnection = () => {
         console.log('Creating peer connection');
         const pc = new RTCPeerConnection({
-            iceServers: [
-                { urls: 'stun:stun.l.google.com:19302' }
-            ]
+            iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
         });
 
         // Add local stream
@@ -51,9 +48,9 @@ const VideoRoom = () => {
             }
         };
 
-        pc.onconnectionstatechange = (event) => {
+        pc.onconnectionstatechange = () => {
             console.log('Connection state changed:', pc.connectionState);
-            switch(pc.connectionState) {
+            switch (pc.connectionState) {
                 case 'connected':
                     setConnectionStatus('Connected');
                     break;
@@ -63,6 +60,8 @@ const VideoRoom = () => {
                 case 'failed':
                     setConnectionStatus('Connection failed');
                     break;
+                default:
+                    break;
             }
         };
 
@@ -71,28 +70,16 @@ const VideoRoom = () => {
             if (remoteVideoRef.current && event.streams[0]) {
                 console.log('Setting remote video stream');
                 remoteVideoRef.current.srcObject = event.streams[0];
+                remoteVideoRef.current.onloadedmetadata = () => {
+                    remoteVideoRef.current.play().catch(err => {
+                        console.error('Error playing remote video:', err);
+                    });
+                };
                 setConnectionStatus('Connected');
             }
         };
 
         return pc;
-    };
-
-    const initiateCall = async () => {
-        try {
-            console.log('Initiating call');
-            if (!peerConnectionRef.current) {
-                peerConnectionRef.current = createPeerConnection();
-            }
-            const offer = await peerConnectionRef.current.createOffer();
-            await peerConnectionRef.current.setLocalDescription(offer);
-            console.log('Sending offer');
-            socketRef.current.emit('offer', { offer, meeting_id });
-            setConnectionStatus('Waiting for patient to accept...');
-        } catch (err) {
-            console.error('Error initiating call:', err);
-            setError('Failed to initiate call');
-        }
     };
 
     useEffect(() => {
@@ -108,6 +95,11 @@ const VideoRoom = () => {
                 localStreamRef.current = stream;
                 if (localVideoRef.current) {
                     localVideoRef.current.srcObject = stream;
+                    localVideoRef.current.onloadedmetadata = () => {
+                        localVideoRef.current.play().catch(err => {
+                            console.error('Error playing local video:', err);
+                        });
+                    };
                 }
 
                 // Connect to signaling server
@@ -128,7 +120,7 @@ const VideoRoom = () => {
                             peerConnectionRef.current = createPeerConnection();
                             const offer = await peerConnectionRef.current.createOffer();
                             await peerConnectionRef.current.setLocalDescription(offer);
-                            
+
                             console.log('Sending offer to patient');
                             socketRef.current.emit('offer', {
                                 offer,
@@ -204,6 +196,10 @@ const VideoRoom = () => {
         if (peerConnectionRef.current) {
             peerConnectionRef.current.close();
         }
+        if (socketRef.current) {
+            socketRef.current.disconnect();
+        }
+        history.push('/'); // go back to home or dashboard
     };
 
     return (
@@ -213,7 +209,7 @@ const VideoRoom = () => {
                 <p>{connectionStatus}</p>
                 <p>Meeting ID: {meeting_id}</p>
             </div>
-            
+
             <div className="video-container">
                 <div className="remote-video-wrapper">
                     <video
@@ -239,6 +235,18 @@ const VideoRoom = () => {
                 </div>
             </div>
 
+            <div className="controls">
+                <button onClick={toggleMute}>
+                    {isMuted ? <FaMicrophoneSlash /> : <FaMicrophone />}
+                </button>
+                <button onClick={toggleVideo}>
+                    {isVideoOff ? <FaVideoSlash /> : <FaVideo />}
+                </button>
+                <button onClick={handleEndCall} className="end-call">
+                    <FaPhone />
+                </button>
+            </div>
+
             {error && (
                 <div className="error-overlay">
                     <div className="error-content">
@@ -254,4 +262,4 @@ const VideoRoom = () => {
     );
 };
 
-export default VideoRoom; 
+export default VideoRoom;

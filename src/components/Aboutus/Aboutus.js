@@ -38,7 +38,7 @@ const AboutUs = () => {
                         <br />with <span className="highlight-alt">AI Technology</span>
                     </h1>
                     <p className="hero-description">
-                        At Vaidhy AI, we're committed to making advanced medical diagnostics 
+                        At Diagno AI, we're committed to making advanced medical diagnostics 
                         accessible to everyone through cutting-edge artificial intelligence.
                     </p>
                     <div className="hero-badges">
@@ -108,7 +108,7 @@ const AboutUs = () => {
                 viewport={{ once: true }}
                 variants={fadeIn}
             >
-                <h2 className="section-title">Why Choose Vaidhy AI?</h2>
+                <h2 className="section-title">Why Choose Diagno AI?</h2>
                 <div className="features-grid">
                     {[
                         { icon: FaStethoscope, title: "Advanced Diagnostics", desc: "State-of-the-art AI technology for accurate medical analysis" },
@@ -170,7 +170,7 @@ const AboutUs = () => {
             >
                 <div className="cta-content">
                     <h2>Ready to Experience the Future of Healthcare?</h2>
-                    <p>Join thousands of users who trust Vaidhy AI for their healthcare needs</p>
+                    <p>Join thousands of users who trust Diagno AI for their healthcare needs</p>
                     <button 
                         className="cta-button"
                         onClick={() => history.push('/services')}

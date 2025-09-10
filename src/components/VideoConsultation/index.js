@@ -231,6 +231,7 @@ const VideoConsultation = () => {
         <div className="video-consultation-container">
             <div className="consultation-header">
                 <div className="consultation-info">
+                    
                     <h2>Patient Consultation</h2>
                     <div className="consultation-status">
                         <div className="status-indicator"></div>
