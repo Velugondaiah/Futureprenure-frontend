@@ -16,6 +16,9 @@ import VideoRoom from './components/VideoRoom';
 import DiagnosisAppointments from './components/DiagnosisAppointments/index';
 import { NavigationProvider } from './contexts/NavigationContext';
 
+
+
+
 import './App.css';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
