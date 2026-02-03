@@ -4,11 +4,17 @@
     padding: 15px;
 }
 .sign-up-heading{
-    margin-top: 0px;
-    padding-top: 0px;
+    color: #0A514E;
     font-size: 15px;
-    margin-top: 25px;
-    margin-right: 10px;
+    margin-top: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.sign-up-heading:hover{
+    color: #083d3b;
+    text-decoration: underline;
 }
 .login-container{
     display: flex;
@@ -21,7 +27,9 @@
 }
 .button-container{
     display: flex;
+    flex-direction: column;
     align-items: center;
+    margin-top: 10px;
 }
 .image{
     height: 130px;
@@ -76,16 +84,39 @@
     align-self: flex-end;
 }
 .button-otp{
-    background-color:#3b82f6;
-    height: 40px;
-     border: none;
-     width: 150px;
+    background-color: #0A514E;
+    height: 45px;
+    border: none;
+    width: 100%;
     color: #ffffff;
     font-weight: bold;
-    font-size: 17px;
+    font-size: 18px;
     border-radius: 7px;
-    margin-top: 15px;
-    align-self: flex-end;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button-otp:hover{
+    background-color: #083d3b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(10, 81, 78, 0.3);
+}
+
+.button-otp:active{
+    transform: translateY(0);
+}
+
+.link{
+    text-decoration: none;
+    width: 100%;
+}
+
+.error-message{
+    color: #dc2626;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
 }
 .login-image{
     height: 80vh;

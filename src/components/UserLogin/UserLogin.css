@@ -72,6 +72,43 @@
     font-size: 20px;
     border-radius: 7px;
     margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button:hover{
+    background-color: #083d3b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(10, 81, 78, 0.3);
+}
+
+.button:active{
+    transform: translateY(0);
+}
+
+.link{
+    text-decoration: none;
+}
+
+.sign-up-heading{
+    color: #0A514E;
+    font-size: 15px;
+    margin-top: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.sign-up-heading:hover{
+    color: #083d3b;
+    text-decoration: underline;
+}
+
+.error-message{
+    color: #dc2626;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
 }
 
 .login-image{

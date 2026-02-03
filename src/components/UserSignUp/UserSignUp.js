@@ -223,10 +223,10 @@ class SignUp extends Component {
                         {showError && <p className="error-message">{errorMsg}</p>}
                         
                         <div className="button-container">
+                            <button className="button-otp" type="submit">Sign Up</button>
                             <Link to="/login" className="link">
                                 <p className="sign-up-heading">Already have an account? Sign In</p>
                             </Link>
-                            <button className="button-otp" type="submit">Sign Up</button>
                         </div>
                     </form>
                 </div>

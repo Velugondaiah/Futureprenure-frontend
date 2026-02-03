@@ -9,6 +9,8 @@ import { GiLungs } from "react-icons/gi";
 import "./Header.css";
 import { Sidebar, SidebarItem } from "./StyledComponent";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 class Header extends Component {
   state = { isSidebarOpen: false, healthMetrics: { heart_rate: '--', spo2: '--', temperature: '--' }, showHealthDropdown: false };
 
@@ -77,7 +79,7 @@ class Header extends Component {
         return;
       }
 
-      const response = await fetch(`http://localhost:3009/api/health-metrics/${userId}`, {
+      const response = await fetch(`${API_URL}/api/health-metrics/${userId}`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${jwtToken}`,
