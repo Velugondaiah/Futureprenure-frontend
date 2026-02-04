@@ -90,12 +90,35 @@ class Analyse extends React.Component {
                 
                 // Create a more inclusive regex pattern that works for all languages
                 if (selectedLanguage === 'english') {
-                    // For English, use the standard pattern
-                    const specialistMatch = formattedOutput.match(/5\.\s*Recommended\s*Specialist:[\s\S]*?Specialist:\s*(\w+)/i);
-                    if (specialistMatch) {
+                    // For English, try multiple patterns to extract the specialist
+                    // Pattern 1: "- Specialist: Neurologist" or "Specialist: Neurologist"
+                    let specialistMatch = formattedOutput.match(/[-•*]?\s*Specialist:\s*([A-Za-z]+)/i);
+                    
+                    // Pattern 2: Look in section 5 for any specialist name from the known list
+                    if (!specialistMatch) {
+                        const knownSpecialists = ['Dermatologist', 'Cardiologist', 'Neurologist', 'Orthopedist', 
+                            'Ophthalmologist', 'ENT', 'Gastroenterologist', 'Pulmonologist', 
+                            'Endocrinologist', 'Oncologist', 'Infectious', 'Nephrologist', 'Urologist',
+                            'Psychiatrist', 'Rheumatologist', 'Hematologist', 'General Physician'];
+                        
+                        // Look for any of these specialists in section 5
+                        const section5Match = formattedOutput.match(/5\.\s*Recommended\s*Specialist:[\s\S]*$/i);
+                        if (section5Match) {
+                            const section5Content = section5Match[0];
+                            for (const spec of knownSpecialists) {
+                                if (section5Content.toLowerCase().includes(spec.toLowerCase())) {
+                                    specialist = spec;
+                                    console.log('Found specialist from known list:', specialist);
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
                         specialist = specialistMatch[1].trim();
                     }
+                    
                     originalSpecialist = specialist;
+                    console.log('Extracted English specialist:', specialist);
                 } else {
                     // For other languages, use language-specific patterns
                     console.log(`Searching for specialist in ${selectedLanguage} content`);
@@ -142,10 +165,30 @@ class Analyse extends React.Component {
                     
                     // For the original English name, extract from originalAnalysis if available
                     if (originalAnalysis) {
-                        const originalSpecialistMatch = originalAnalysis.match(/5\.\s*Recommended\s*Specialist:[\s\S]*?Specialist:\s*(\w+)/i);
+                        // Try multiple patterns to extract the specialist
+                        let originalSpecialistMatch = originalAnalysis.match(/[-•*]?\s*Specialist:\s*([A-Za-z]+)/i);
+                        
                         if (originalSpecialistMatch) {
                             originalSpecialist = originalSpecialistMatch[1].trim();
                             console.log('Extracted original English specialist:', originalSpecialist);
+                        } else {
+                            // Fallback: look for known specialist names in section 5
+                            const knownSpecialists = ['Dermatologist', 'Cardiologist', 'Neurologist', 'Orthopedist', 
+                                'Ophthalmologist', 'ENT', 'Gastroenterologist', 'Pulmonologist', 
+                                'Endocrinologist', 'Oncologist', 'Infectious', 'Nephrologist', 'Urologist',
+                                'Psychiatrist', 'Rheumatologist', 'Hematologist', 'General Physician'];
+                            
+                            const section5Match = originalAnalysis.match(/5\.\s*Recommended\s*Specialist:[\s\S]*$/i);
+                            if (section5Match) {
+                                const section5Content = section5Match[0];
+                                for (const spec of knownSpecialists) {
+                                    if (section5Content.toLowerCase().includes(spec.toLowerCase())) {
+                                        originalSpecialist = spec;
+                                        console.log('Found original specialist from known list:', originalSpecialist);
+                                        break;
+                                    }
+                                }
+                            }
                         }
                     }
                     
